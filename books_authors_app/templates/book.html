@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREAR LIBRO</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{book.title}}</h1>
+        <h4>ID: {{book.id}}</h4>
+        <h4>Descripción: {{book.desc}}</h4>
+        <h4>Autor(es):</h4>
+        {% for a in book.authors.all %}
+            <li>{{a.first_name}} {{a.last_name}}</li>
+        {% endfor %}
+        
+        <form action='/books/{{book.id}}' method="POST">
+            {% csrf_token %}                  
+            <div class="mb-3">
+                <select class="form-select" name="option">
+                    <option selected value="">Selecciona un autor</option>
+                    {% for a in autor %}
+                        <option value="{{a.id}}">{{a.first_name}} {{a.last_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Añade Autor</button>
+            </button>
+        </form>
+
+    </div>
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

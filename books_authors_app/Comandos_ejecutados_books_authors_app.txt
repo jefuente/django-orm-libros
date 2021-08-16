@@ -1,0 +1,74 @@
+from books_authors_app.models import Book, Author
+
+libro1=Book.objects.create(title="C Sharp")
+libro2=Book.objects.create(title="Java")
+libro3=Book.objects.create(title="Python")
+libro4=Book.objects.create(title="PHP")
+libro5=Book.objects.create(title="Ruby")
+
+autor1=Author.objects.create(first_name="Jane", last_name="Austen")
+autor2=Author.objects.create(first_name="Emily", last_name="Dickinson")
+autor3=Author.objects.create(first_name="Fyodor", last_name="Dostoevksy")
+autor4=Author.objects.create(first_name="Williams", last_name="Shakespeare")
+autor5=Author.objects.create(first_name="Lau", last_name="Tzu")
+
+libro1= Book.objects.get(id=1)
+libro1.title = "C #"
+libro1.save()
+
+autor4= Author.objects.get(id=4)
+autor4.first_name = "Bill"
+autor4.save()
+
+autor1 = Author.objects.get(id=1)
+libro1 = Book.objects.get(id=1)
+libro2 = Book.objects.get(id=2)
+libro1.authors.add(autor1)
+libro2.authors.add(autor1)
+
+autor2 = Author.objects.get(id=2)
+libro1 = Book.objects.get(id=1)
+libro2 = Book.objects.get(id=2)
+libro3 = Book.objects.get(id=3)
+libro1.authors.add(autor2)
+libro2.authors.add(autor2)
+libro3.authors.add(autor2)
+
+autor3 = Author.objects.get(id=3)
+libro1 = Book.objects.get(id=1)
+libro2 = Book.objects.get(id=2)
+libro3 = Book.objects.get(id=3)
+libro4 = Book.objects.get(id=4)
+libro1.authors.add(autor3)
+libro2.authors.add(autor3)
+libro3.authors.add(autor3)
+libro4.authors.add(autor3)
+
+autor4 = Author.objects.get(id=4)
+libro1 = Book.objects.get(id=1)
+libro2 = Book.objects.get(id=2)
+libro3 = Book.objects.get(id=3)
+libro4 = Book.objects.get(id=4)
+libro5 = Book.objects.get(id=5)
+libro1.authors.add(autor4)
+libro2.authors.add(autor4)
+libro3.authors.add(autor4)
+libro4.authors.add(autor4)
+libro5.authors.add(autor5)
+
+autores_libro3= libro3.authors.all()
+for a in autores_libro3:
+    print(a.first_name, a.last_name, a.id)
+
+libro3.authors.remove(autor2)
+
+autor5 = Author.objects.get(id=5)
+libro2.authors.add(autor5)
+
+libros_autor3=autor3.books.all()
+for l in libros_autor3:
+    print(l.title)
+
+autores_libro5=libro5.authors.all()
+for a in autores_libro5:
+    print(a.first_name, a.last_name)
